@@ -1,0 +1,26 @@
+{
+  "name": "swells-app",
+  "version": "1.0.0",
+  "description": "Surfing App for Surfers",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jzelaya0/Project_4-Swells-App.git"
+  },
+  "author": "Jesse Zelaya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jzelaya0/Project_4-Swells-App/issues"
+  },
+  "homepage": "https://github.com/jzelaya0/Project_4-Swells-App#readme",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "mongoose": "^4.1.5",
+    "passport": "^0.3.0"
+  }
+}
