@@ -2,14 +2,13 @@
 //BASE SETUP
 // ========================================================
 var express    = require('express');
+var app        = express();
 var mongoose   = require('mongoose');
 var passport   = require('passport');
 var bodyParser = require('body-parser');
 var morgan     = require('morgan');
 var port       = process.env.PORT || 3000;
 
-// Create Express App
-var app = express();
 
 //CONNTECT TO DATABASE
 // ==============================
@@ -24,6 +23,7 @@ db.once('open', function(data){
 //EXPRESS CONFIGURATION
 // ==============================
 app.use(morgan('dev'));//Log all requests to the console
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json());// Grab information from html forms
 
 //Require Routes.js
