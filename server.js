@@ -13,11 +13,13 @@ var app = express();
 
 //CONNTECT TO DATABASE
 // ==============================
-mongoose.connect('mongodb://jesse:iration@ds035653.mongolab.com:35653/swellsdb',
-  function(err) {
-    if(err) return err;
-    return "Connected to Mongo";
-});
+mongoose.connect('mongodb://jesse:iration@ds035653.mongolab.com:35653/swellsdb');
+//Test Database connection
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'Could not establish database connection'));
+db.once('open', function(data){
+  console.log("Succesfull database connection");
+})
 
 //EXPRESS CONFIGURATION
 // ==============================
@@ -26,7 +28,7 @@ app.use(bodyParser.json());// Grab information from html forms
 
 //Require Routes.js
 routes = require('./routes/routes.js');//load routes
-app.use(routes)
+app.use(routes);
 
 
 //LAUNCH PORT
