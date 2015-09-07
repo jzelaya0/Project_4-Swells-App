@@ -37,6 +37,6 @@ userSchema.methods.authenticate = function(password){
 
 
 //Create User model out of userSchema
-var user = mongoose.model('User', userSchema);
+var User = mongoose.model('User', userSchema);
 
 module.exports = User;
