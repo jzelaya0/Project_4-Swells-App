@@ -6,7 +6,7 @@ var bcrypt    = require('bcrypt');
 //UserSchema
 // ==============================
 var userSchema = new Schema({
-  name: String,
+  username: String,
   email: {type: String, requried: true, unique: true},
   password: {type: String, required: true, select: false}
 });

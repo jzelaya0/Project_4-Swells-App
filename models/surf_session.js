@@ -3,19 +3,20 @@ var Schema   = mongoose.Schema;
 
 //UserSchema
 // ==============================
-var surfSessionSchema = new Schema({
+var SurfSessionSchema = new Schema({
   title: String,
-  location: String,
+  longitude: Number,
+  latitude: Number,
   surfHeight: Number,
   weather: String,
   temperature: Number,
   waterQuality: String,
   crowd: String,
   comment: String,
-  user: { type: Schema.Types.ObjectId , ref: 'User' }
+  userId: { type: Schema.Types.ObjectId , ref: 'User' }
 });
 
 
-var surfSession = mongoose.model('SurfSession', surfSessionSchema);
+var surfSession = mongoose.model('SurfSession', SurfSessionSchema);
 
 module.exports = surfSession;
