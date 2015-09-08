@@ -1,5 +1,5 @@
 //./controllers/surf_sessions.js
-var surfSession = require('../models/surf_sessions.js');
+var surfSession = require('../models/surf_session.js');
 var User         = require('../models/user');
 var mongoose     = require('mongoose');
 
