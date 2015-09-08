@@ -41,7 +41,7 @@ function authenticateUser(req, res) {
   function(err, user){
     if(!user) return res.json({message: 'User does not exist'});
     //If user name exists then verify password
-    user.verifyPassword(req.body.password, function(err, isMatch){
+    user.authenticate(req.body.password, function(err, isMatch){
       if(err) return res.json({message: err});
       if(!isMatch) return res.json({message: "Invalid Password"});
       res.json({success: "Successfully Authenticated"});

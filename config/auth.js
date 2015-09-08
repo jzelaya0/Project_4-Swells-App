@@ -10,7 +10,7 @@ passport.use(new BasicStrategy(
       if(err) return next(err);
       if(!user) return next(null,false);
 
-      user.varifyPassword(password, function(err, isMatch){
+      user.authenticate(password, function(err, isMatch){
         if (err) return next(err);
         if (!isMatch) return next(null, false);
         return next(null, user);

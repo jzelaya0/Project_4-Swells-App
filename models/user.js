@@ -20,6 +20,7 @@ userSchema.pre('save',function(next){
 
   //Generate Salt
   bcrypt.genSalt(5, function(err,salt){
+      if(err) return next(err);
     bcrypt.hash(user.password, salt, function(err,hash){
       if(err) return next(err);
       //Change the password to the hashed version
