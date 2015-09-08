@@ -6,7 +6,7 @@ var User          = require('../models/user.js');
 
 passport.use(new BasicStrategy(
   function(username, password, next) {
-    User.findOne({username: username}, function(err, username){
+    User.findOne({username: username}, function(err, user){
       if(err) return next(err);
       if(!user) return next(null,false);
 
