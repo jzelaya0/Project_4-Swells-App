@@ -6,12 +6,31 @@ var mongoose     = require('mongoose');
 // GET ALL SURF SESIONS
 // ===================================
 function getSurfSessions(req, res) {
-  surfSession.find({}, function(err, dbResponse) {
+  //Finds a surf session with specific user with that username
+  surfSession.find({}).lean().exec(function(err, sessions) {
     if(err) return res.send('Something went wrong');
     console.log('GET request for all Surf Sessions');
 
-    res.send('Got all locations');
-    });
+    var counter = 0;
+    var sesh = sessions.length;
+    //Get access to the surf session
+    var closure = function(sessions){
+      return function(err, user){
+        counter ++ ;
+        if(err) res.send(err);
+
+        sessions.username = user.username;
+
+        if(counter === sesh) return res.json(sessions);
+      };
+    };//End Closure
+
+    //Iterate through all locations to get username
+    for (var i = 0; i < sesh; i++) {
+      User.findById(locations[i].userId, closure(sessions[i]));
+    }
+
+  });//End SurfSession find
 }
 
 // GET ONE SURF SESSION
