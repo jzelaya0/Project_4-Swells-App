@@ -26,9 +26,12 @@ app.use(morgan('dev'));//Log all requests to the console
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json());// Grab information from html forms
 
+//Use passport in app
+app.use(passport.initialize());
+
 //Require Routes.js
 routes = require('./routes/routes.js');//load routes
-app.use(routes);
+app.use('/api', routes);
 
 
 //LAUNCH PORT
