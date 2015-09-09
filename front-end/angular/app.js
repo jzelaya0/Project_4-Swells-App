@@ -3,7 +3,8 @@
   angular
     .module('swellsApp',[
         'ngRoute',
-        'ngCookies'
+        'ngCookies',
+        'LoginController'
     ])
     .run(runGlobals);
     //
