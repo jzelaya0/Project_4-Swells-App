@@ -1,13 +1,13 @@
 //./front-end/angular/loginController.js
 (function() {
   angular
-    .module('LoginController')
+    .module('LoginController',[])
     .controller('LoginController', LoginController);
 
     //Inject Depenecies
-    LoginController.$inject = ['$location', 'authService'];
+    LoginController.$inject = ['$location'];
 
-    function LoginController($location, authService) {
+    function LoginController($location) {
       var vm = this;
       //Reset log in credentials
       authService.ClearCredentials();
