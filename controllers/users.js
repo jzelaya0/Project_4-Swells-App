@@ -19,11 +19,12 @@ function createNewUser(req, res) {
   //Create a new instance of User model
   var user = new User({
     username: req.body.username,
+    email : req.body.email,
     password: req.body.password
   });
   //Save User if no errors
   user.save(function(err){
-    if(err) return res.json({message:"User already exists"});
+    if(err) { res.json({message:"User already exists"})}
     res.json({success: 'User created!'});
   });
 }
