@@ -1,19 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="swellsApp">
   <head>
     <meta charset="utf-8">
     <title>Swells App</title>
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- ANGULAR SCRIPTS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-route.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-cookies.min.js"></script>
     <!-- JAVASCRIPT -->
-    <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCihFP_XSX-34e8-52-pfUT4Ead5WukC6g&callback=initMap">
-    </script>
+    <script src="./angular/app.js" charset="utf-8"></script>
+    <script src="./angular/routes.js" charset="utf-8"></script>
+    <!-- Google Api -->
+    <!-- <script async defer -->
+      <!-- src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCihFP_XSX-34e8-52-pfUT4Ead5WukC6g&callback=initMap"> -->
+    <!-- </script> -->
   </head>
   <body>
+    <div class="container">
+      <div ng-view>
 
+      </div>
+    </div>
   </body>
 </html>
