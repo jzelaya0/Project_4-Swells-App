@@ -5,9 +5,9 @@
     .controller('LoginController', LoginController);
 
     //Inject Depenecies
-    LoginController.$inject = ['$location'];
+    LoginController.$inject = ['$location', 'authService'];
 
-    function LoginController($location) {
+    function LoginController($location, authService) {
       var vm = this;
       //Reset log in credentials
       authService.ClearCredentials();
