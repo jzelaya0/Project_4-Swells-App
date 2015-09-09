@@ -1,5 +1,11 @@
 //./controllers/users.js
-var User = require('../models/user.js');
+var User       = require('../models/user.js');
+var bodyParser = require('body-parser');
+var jwt        = require('jsonwebtoken');
+var config     = require('../config');
+
+//Set secret for creating tokens
+var superSecret = config.secret;
 
 // GET ALL USERS
 // ===================================
@@ -19,6 +25,7 @@ function createNewUser(req, res) {
   //Create a new instance of User model
   var user = new User({
     username: req.body.username,
+    email   : req.body.email,
     password: req.body.password
   });
   //Save User if no errors
@@ -36,22 +43,47 @@ function authenticateUser(req, res) {
   if(!req.body.username || !req.body.password){
     return res.json({message: 'Error on request'});
   }
-  //Query database to find an existing username
-  User.findOne({username: req.body.username},
-  function(err, user){
-    if(!user) return res.json({message: 'User does not exist'});
-    //If user name exists then verify password
-    user.authenticate(req.body.password, function(err, isMatch){
-      if(err) return res.json({message: err});
-      if(!isMatch) return res.json({message: "Invalid Password"});
-      res.json({success: "Successfully Authenticated"});
-    });
+  User.findOne({
+    username: req.body.username
+  }).select('Name username password').exec(function(err, user){
+      if(err) throw err;
+
+      //No user with that user name was found
+      if(!user){
+        res.json({
+          success: false,
+          message: 'Authentication Failed. User was not found'
+        });
+      }else if(user){
+        //Check if password matches
+        var validPassword = user.comparePassword(req.body.password);
+        if(!validPassword){
+          res.json({
+            success: false,
+            message: 'Authentication Failed. Wrong Password'
+          });
+        }
+      }else {
+        //if user is found and password is correct
+        var token = jwt.sign({
+          username: user.username
+        }, superSecret,{
+          expiresInMinutes: 1440 //Expires in 24hours
+        });
+
+        //Return information including token as json
+        res.json({
+          success: true,
+          message: 'Here is your token!',
+          token  : token
+        });
+      }//end conditional
   });
-}
+}//end authenticateUser
 
 //Export User Controller
 module.exports = {
-    getAllUsers : getUsers,
-    newUser     : createNewUser,
-    authenticate : authenticateUser,
+    getAllUsers   : getUsers,
+    newUser       : createNewUser,
+    authenticate  : authenticateUser,
 };
