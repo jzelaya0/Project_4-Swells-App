@@ -13,7 +13,7 @@ var SurfSessionSchema = new Schema({
   waterQuality: String,
   crowd: String,
   comment: String,
-  userId: { type: Schema.Types.ObjectId , ref: 'User' }
+  userId: String
 });
 
 
