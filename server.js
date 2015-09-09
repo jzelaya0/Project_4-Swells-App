@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json());// Grab information from html forms
 
 //Use passport in app
-app.use(passport.initialize());
+// app.use(passport.initialize());
 
 //Require Routes.js
 routes = require('./routes/routes.js');//load routes
