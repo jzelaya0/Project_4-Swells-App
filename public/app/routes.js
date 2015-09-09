@@ -1,29 +1,23 @@
 //./front-end/angular/routes.js
 (function() {
   angular
-    .module('swellsApp')
+    .module('swellsApp.routes', ['ngRoute'])
     .config(appRoutes);
 
-    appRoutes.$inject = ["$routeProvider"];
+    appRoutes.$inject = ["$routeProvider", "$locationProvider"];
 
-    function appRoutes($routeProvider) {
+    function appRoutes($routeProvider, $locationProvider) {
       $routeProvider
+        .when('/', {
+          templatesUrl: 'app/views/home.html'
+        })
         .when('/login',{
-          templateUrl: './templates/login.html',
-          controller: 'LoginController',
-          controllerAs: 'LoginCtrl'
+          templateUrl: 'app/views/templates/login.html',
+          controller: 'mainController',
+          controllerAs: 'main'
         })
-        .when('/signup',{
-          templateUrl: '/.templates/signup.html',
-          controller: 'SignupController',
-          controllerAs: 'SignupCtrl'
-        })
-        .when('/map', {
-          templateUrl: './templates/map.html',
-          controller: 'MapController',
-          controllerAs: 'MapCtrl'
-        })
-        .otherwise('/login');
+    
+        .otherwise('/');
     }//End appRoutes
 
 }());//End IIFE
