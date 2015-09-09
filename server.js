@@ -7,13 +7,13 @@ var mongoose   = require('mongoose');
 var passport   = require('passport');
 var bodyParser = require('body-parser');
 var morgan     = require('morgan');
-var port       = process.env.PORT || 3000;
 var path       = require('path');
+var config     = require('./config');
 
 
 //CONNTECT TO DATABASE
 // ==============================
-mongoose.connect('mongodb://jesse:iration@ds035653.mongolab.com:35653/swellsdb');
+mongoose.connect(config.database);
 //Test Database connection
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Could not establish database connection'));
@@ -53,12 +53,4 @@ app.use('/api', routes);
 // has to be registered after API ROUTES
 app.get('*', function(req, res) {
 	res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
-});
-
-
-//LAUNCH PORT
-// ==============================
-app.listen(port,function(err){
-  if(err) return console.log(err);
-  console.log('Listening on port', port);
 });
