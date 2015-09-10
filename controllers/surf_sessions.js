@@ -1,15 +1,17 @@
 //./controllers/surf_sessions.js
-var surfSession = require('../models/surf_session.js');
+var SurfSession = require('../models/surf_session.js');
 var User         = require('../models/user');
 var mongoose     = require('mongoose');
 
-// GET ALL SURF SESIONS
+// GET ALL SURF SESIONS /api/surfSession for GET
 // ===================================
 function getSurfSessions(req, res) {
   //Finds a surf session with specific user with that username
-  surfSession.find({}).lean().exec(function(err, sessions) {
-    if(err) return res.send('Something went wrong');
-    console.log('GET request for all Surf Sessions');
+  SurfSession.find({}).lean().exec(function(err, sessions) {
+    if(err) {
+      console.log('GET request for all Surf Sessions');
+      return res.send('Something went wrong');
+    }
 
     var counter = 0;
     var sesh = sessions.length;
@@ -21,38 +23,42 @@ function getSurfSessions(req, res) {
 
         sessions.username = user.username;
 
-        if(counter === sesh) return res.json(sessions);
+        if(counter === sesh) {
+          return res.json(sessions);
+        }
       };
     };//End Closure
 
-    //Iterate through all locations to get username
+    //Iterate through all sessions to get username
     for (var i = 0; i < sesh; i++) {
-      User.findById(locations[i].userId, closure(sessions[i]));
+      User.findById(sessions[i].userId, closure(sessions[i]));
     }
 
   });//End SurfSession find
 }
 
-// GET ONE SURF SESSION
+// GET ONE SURF SESSION /api/surfSession/:surfSession_id for GET
 // ===================================
 function getOneSurfSession(req, res) {
   console.log(req.user._id);
-  surfSession.find({
+  SurfSession.find({
     userId: req.user._id,
-    _id: req.params.location_id
+    _id: req.params.surfSession_id
   },function(err,surfSession){
-    if(err) return res.send(err);
+    if(err) {
+      res.send(err);
+    }
     res.json(surfSession);
   });
 }
 
-// POST A SURF SESSION
+// POST A SURF SESSION /api/surfSession for GET
 // ===================================
 function postSurfSession(req, res) {
   //Create a new instance of the SurfSession model
-  var surfSession          = new surfSession();
+  var surfSession = new SurfSession();
 
-  surfSession.tile         = req.body.title;
+  surfSession.title        = req.body.title;
   surfSession.longitude    = req.body.longitude;
   surfSession.latitude     = req.body.latitude;
   surfSession.surfHeight   = req.body.surfHeight;
@@ -65,34 +71,42 @@ function postSurfSession(req, res) {
 
   //Save the surfSession and check for errors
   surfSession.save(function(err){
-    if(err) return res.send(err);
+    if(err) {
+      return res.send(err);
+    }
     res.json({message: "Session added", data: surfSession});
   });
 
 }
 
-// UPDATE A SESSION
+// UPDATE A SESSION /api/surfSession/surfSession_id for GET
 // ===================================
 function updateSurfSession(req, res) {
-  surfSession.update({
+  SurfSession.update({
     userId: req.user._id,
     _id: req.params.surfSession._id
+  }, {
+    title: req.body.title
   },
-  function(err,num){
-    if(err) return res.send(err);
+  function(err){
+    if(err) {
+       res.send(err);
+    }
     res.json({message: 'Update Successful'});
   });
 }
 
-// DELETE A SESSION
+// DELETE A SESSION /api/surfSession/:surfSession_id for DELETE
 // ===================================
 function deleteSurfSession(req, res) {
-  surfSession.remove({
+  SurfSession.remove({
     userId: req.user._id,
     _id: req.params.surfSession._id
   },
   function(err){
-    if(err) return res.send(err);
+    if(err) {
+      res.send(err);
+    }
     res.json({message: 'Successful deletion'});
   });
 }

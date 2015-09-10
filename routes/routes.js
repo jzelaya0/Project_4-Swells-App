@@ -23,11 +23,11 @@ Router.route('/users')
 
 //Surf Sessions Routes
 // ====================================
-Router.route('/surf_sessions')
+Router.route('/surfSession')
+  .post(authController.isAuthenticated, surfSessionsController.new)
   .get(surfSessionsController.getAll)
-  .post(authController.isAuthenticated, surfSessionsController.new);
 
-Router.route('/surf_sessions/:surf_sessions_id')
+Router.route('/surfSession/:surfSession_id')
   .get(authController.isAuthenticated, surfSessionsController.getOne)
   .put(authController.isAuthenticated, surfSessionsController.edit)
   .delete(authController.isAuthenticated, surfSessionsController.delete);

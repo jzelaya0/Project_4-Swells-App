@@ -6,8 +6,7 @@ var bcrypt    = require('bcrypt');
 //UserSchema
 // ==============================
 var userSchema = new Schema({
-  username: String,
-  email: {type: String, requried: true, unique: true},
+  username: {type: String, requried: true, unique: true},
   password: {type: String, required: true, select: false}
 });
 
@@ -31,7 +30,7 @@ userSchema.pre('save',function(next){
 });//end save
 
 //Method to compare given password with the database hash
-userSchema.methods.authenticate = function(password){
+userSchema.methods.verifyPassword = function(password){
   var user = this;
   return bcrypt.compareSync(password, user.password);
 }
