@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="swellsApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Swells App</title>
+    <!-- CSS -->
+    <link href="./bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="./css/styles.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Api -->
+    <!-- <script async defer -->
+      <!-- src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCihFP_XSX-34e8-52-pfUT4Ead5WukC6g&callback=initMap"> -->
+    <!-- </script> -->
+  </head>
+  <body>
+    <div class="container">
+            <div class="row">
+                <div class="col-md-12 main-title text-center">
+                    <h1>Swells</h1>
+                </div>
+            </div>
+            <div class="row">
+
+                <div>
+                    <div class="col-md-8">
+                        <div id="map-canvas"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="control-panel">
+                            <div ng-view></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- JAVASCRIPT -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- ANGULAR SCRIPTS -->
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/routing.js"></script>
+    <!-- <script src="js/authService.js"></script> -->
+    <script src="js/googleMapService.js"></script>
+    <script src="js/loginCtrl.js"></script>
+    <script src="js/panelCtrl.js"></script>
+    <script src="js/signupCtrl.js"></script>
+  </body>
+</html>
