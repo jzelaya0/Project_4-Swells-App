@@ -1,42 +1,50 @@
 //server.js
 //BASE SETUP
 // ========================================================
-var express    = require('express');
-var app        = express();
+var express    = require('express');		// call express
+var app        = express(); 				// define our app using express
+var bodyParser = require('body-parser'); 	// get body-parser
+var morgan     = require('morgan'); 		// used to see requests
 var mongoose   = require('mongoose');
-var passport   = require('passport');
-var bodyParser = require('body-parser');
-var morgan     = require('morgan');
-var port       = process.env.PORT || 3000;
+var config 	   = require('./config');
 
 
 //CONNTECT TO DATABASE
 // ==============================
-mongoose.connect('mongodb://jesse:iration@ds035653.mongolab.com:35653/swellsdb');
+mongoose.connect(config.database);
 //Test Database connection
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Could not establish database connection'));
 db.once('open', function(data){
   console.log("Succesfull database connection");
-})
+});
 
 //EXPRESS CONFIGURATION
 // ==============================
+// configure app to handle CORS requests
+app.use(function(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+	next();
+});
 app.use(morgan('dev'));//Log all requests to the console
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());// Grab information from html forms
 
-//Use passport in app
-app.use(passport.initialize());
+// set static files location
+// used for requests that our frontend will make
+app.use(express.static(__dirname + '/public'));
+
 
 //Require Routes.js
-routes = require('./routes/routes.js');//load routes
+apiRoutes = require('./routes/routes.js')(app, express);//load routes
 app.use('/api', routes);
 
 
 //LAUNCH PORT
 // ==============================
-app.listen(port,function(err){
+app.listen(config.port,function(err){
   if(err) return console.log(err);
-  console.log('Listening on port', port);
+  console.log('Listening on port', config.port);
 });
