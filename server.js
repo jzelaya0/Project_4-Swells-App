@@ -32,7 +32,7 @@ app.use(bodyParser.json());// Grab information from html forms
 app.use(express.static('public'));
 //app.use('/css', express.static(__dirname + '/public/css'));
 //Use passport in app
-app.use(passport.initialize());
+// app.use(passport.initialize());
 
 
 //Require Routes.js

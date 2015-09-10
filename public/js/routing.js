@@ -5,26 +5,30 @@
     .module('routing', [])
     .config(appRoutes);
 
-    appRoutes.$inject = ["$routeProvider"];
+    appRoutes.$inject = ["$routeProvider" ,'$locationProvider'];
 
-    function appRoutes($routeProvider) {
+    function appRoutes($routeProvider, $locationProvider) {
       $routeProvider
-        .when('/login',{
-          templateUrl: './templates/login.html',
-          controller: 'LoginCtrl',
-          controllerAs: 'LoginCtrl'
+        .when('/home',{
+          templateUrl: './templates/home.html',
+          controller: 'homeCtrl',
+          controllerAs: 'homeCtrl'
         })
-        .when('/signup',{
+        .when('/map',{
           templateUrl: './templates/signup.html',
-          controller: 'SignupCtrl',
-          controllerAs: 'SignupCtrl'
+          controller: 'MapCtrl',
+          controllerAs: 'MapCtrl'
         })
         .when('/panel', {
           templateUrl: './templates/panel.html',
           controller: 'PanelCtrl',
           controllerAs: 'PanelCtrl'
         })
-        .otherwise('/login');
+        .otherwise('/');
+
+        $locationProvider.html5Mode(true);
+
     }//End appRoutes
+
 
 }());//End IIFE

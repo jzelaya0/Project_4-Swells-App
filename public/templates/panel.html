@@ -1,6 +1,6 @@
-<h2>MapIt! Panel</h2>
-<div class="alert alert-danger" ng-if="showErrorMessage">{{errorMessage}}</div>
-<div class="alert alert-info" ng-model="successMessage" ng-if="showSuccessMessage">{{successMessage}}</div>
+<h2>Swells Panel</h2>
+<!-- <div class="alert alert-danger" ng-if="showErrorMessage">{{errorMessage}}</div> -->
+<!-- <div class="alert alert-info" ng-model="successMessage" ng-if="showSuccessMessage">{{successMessage}}</div> -->
 <form ng-submit="sendMessage()">
     <div class="form-group">
         <label for="inputMessage">Message</label>
@@ -12,4 +12,3 @@
          <button class="btn btn-danger" id="delete-button" ng-show="showDeleteButton" ng-click="deleteMessage()">Delete</button>
 
          <br />
-<button class="btn btn-danger" id="logout-btn" ng-click="logout()">Log out</button>
