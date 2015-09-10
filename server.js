@@ -1,11 +1,12 @@
 //server.js
 //BASE SETUP
 // ========================================================
-var express    = require('express');		// call express
-var app        = express(); 				// define our app using express
-var bodyParser = require('body-parser'); 	// get body-parser
-var morgan     = require('morgan'); 		// used to see requests
+var express    = require('express');
+var app        = express();
+var bodyParser = require('body-parser');
+var morgan     = require('morgan');
 var mongoose   = require('mongoose');
+var path       = require('path');
 var config 	   = require('./config');
 
 
@@ -40,6 +41,13 @@ app.use(express.static(__dirname + '/public'));
 //Require Routes.js
 apiRoutes = require('./routes/routes.js')(app, express);//load routes
 app.use('/api', apiRoutes);
+
+// MAIN CATCHALL ROUTE ---------------
+// SEND USERS TO FRONTEND ------------
+// has to be registered after API ROUTES
+app.get('*', function(req, res) {
+	res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
+});
 
 
 //LAUNCH PORT
