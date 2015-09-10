@@ -39,7 +39,7 @@ app.use(express.static(__dirname + '/public'));
 
 //Require Routes.js
 apiRoutes = require('./routes/routes.js')(app, express);//load routes
-app.use('/api', routes);
+app.use('/api', apiRoutes);
 
 
 //LAUNCH PORT
