@@ -2,7 +2,7 @@
 
 (function() {
   angular
-    .module('routing', [])
+    .module('routing', ['ngRoute'])
     .config(appRoutes);
 
     appRoutes.$inject = ["$routeProvider" ,'$locationProvider'];
@@ -15,7 +15,7 @@
           controllerAs: 'homeCtrl'
         })
         .when('/map',{
-          templateUrl: './templates/signup.html',
+          templateUrl: './templates/map.html',
           controller: 'MapCtrl',
           controllerAs: 'MapCtrl'
         })
