@@ -2,8 +2,6 @@
 (function() {
   angular
     .module('swellsApp',[
-      // 'ngRoute',
-      // 'ngCookies',
       'routing',
       'mainCtrl',
       'homeCtrl',

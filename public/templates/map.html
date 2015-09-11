@@ -1,7 +1,7 @@
 <!-- Google Map -->
-<div class="" ng-controller='MapCtrl'>
+<div>
 
-  <div id='map' >
+  <div id='map'ng-click='addMarker(markerLat,markerLng,infoTitle)' >
 
   </div>
 
@@ -23,7 +23,6 @@
         <br/>
         <textarea rows="4" id="inputMessage" ng-model="comment" placeholder="Your comment" required=""></textarea>
       </div>
-      <button class="button"
-              ng-click="addMarker(markerLat,markerLng,infoTitle)">Add</button>
+      <button class="button" ng-click="addMarker(markerLat,markerLng,infoTitle)">Add</button>
   </form>
 </div>
