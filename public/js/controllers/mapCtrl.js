@@ -1,6 +1,6 @@
 (function() {
   angular
-    .module('mapCtrl',['googleMapService'])
+    .module('mapCtrl',['surfService'])
     .controller('MapCtrl', function(Surf) {
       var vm = this;
 
@@ -27,6 +27,22 @@
     			});
     	};
 
+      // Map Initialize
+      // =================================================
+      var mapOptions = {
+        zoom: 8,
+        center: {lat: -34.397, lng: 150.644}
+      };
+      map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+      map.addListener('click', function(evt) {
+        console.log(evt);
+        var marker = new google.maps.Marker({
+           position: evt.latLng,
+           map: map
+         });
+
+       });
 
 
     })//end controller
@@ -78,22 +94,7 @@
 
 
 
-    // Map Initialize
-    // =================================================
-    // var mapOptions = {
-    //   zoom: 8,
-    //   center: {lat: 118.4814, lng: 34.0219}
-    // };
-    // map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    //
-    // map.addListener('click', function(evt) {
-    //   console.log(evt);
-    //   var marker = new google.maps.Marker({
-    //      position: evt.latLng,
-    //      map: map
-    //    });
-    //
-    //  });
+
 
 
 

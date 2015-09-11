@@ -1,7 +1,7 @@
 (function() {
   angular
-    .module('googleMapService',[])
-    .factory('googleMapService', function($http){
+    .module('surfService',[])
+    .factory('Surf', function($http){
 
       //Create a new object
       var surfFactory = {};
@@ -12,7 +12,7 @@
       };
 
       //grab all surfSessions
-      surfFactory.get = function(id){
+      surfFactory.all = function(id){
         return $http.get('/api/surfSessions/');
       };
 

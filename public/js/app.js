@@ -9,7 +9,7 @@
       'homeCtrl',
       'panelCtrl',
       'mapCtrl',
-      'googleMaps'
+      'surfService'
     ])
 
 
